@@ -21,3 +21,16 @@ var sum = numbers.reduce((accumulator,currentNumber) =>{
 })
 
 console.log(sum);
+
+//map find function to find the is element exist or not 
+
+var foundNumber = numbers.find( (x) => {
+return x > 10;    // this will return the first value that matches the given condition
+})
+
+
+// map find index function in order to seach for the indx of a number
+
+var index = number.findIndex((x)=> {
+return x > 13;  // this will return the first value that matches the given condition
+})
