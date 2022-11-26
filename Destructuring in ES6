@@ -1,0 +1,71 @@
+
+import React from "react";
+import ReactDOM from "react-dom";
+import cars from "./practice.js";
+
+          //Destrucring the Cars Arry of Objects as two separete cars
+
+const [honda,tesla] = cars;
+
+        //destructing the honda,tesla objects
+
+const {model:hondaModel,coloursByPopularity:hondaColors,speedStats:hondaSpeedStats} = honda;
+const {model:teslaModel,coloursByPopularity:teslaColors,speedStats:teslaSpeedStats} = tesla;
+       
+           //destrucing the array of top colors   
+
+const [hondaTopColour,hondaLessTop] = hondaColors;
+const [teslaTopColour,teslaSecondTop] = teslaColors;
+
+        //destructuring the top speed of cars   
+
+const {topSpeed:hondaTopSpeed,zeroToSixty:sixty} = hondaSpeedStats;
+const {topSpeed:teslaTopSpeed,zeroToSixty:teslaSixty} = teslaSpeedStats;
+
+ReactDOM.render(
+  <table>
+    <tr>
+      <th>Brand</th>
+      <th>Top Speed</th>
+    </tr>
+    <tr>
+      <td>{tesla.model}</td>
+      <td>{teslaTopSpeed}</td>
+      <td>{teslaTopColour}</td>
+    </tr>
+    <tr>
+      <td>{honda.model}</td>
+      <td>{hondaTopSpeed}</td>
+      <td>{hondaTopColour}</td>
+    </tr>
+  </table>,
+  document.getElementById("root")
+);
+
+
+
+/////////////////////////CARS ARRAY OF OBJECTS///////////////////////////////////
+
+
+const cars = [
+  {
+    model: "Honda Civic",
+    //The top colour refers to the first item in the array below:
+    //i.e. hondaTopColour = "black"
+    coloursByPopularity: ["black", "silver"],
+    speedStats: {
+      topSpeed: 140,
+      zeroToSixty: 8.5
+    }
+  },
+  {
+    model: "Tesla Model 3",
+    coloursByPopularity: ["red", "white"],
+    speedStats: {
+      topSpeed: 150,
+      zeroToSixty: 3.2
+    }
+  }
+];
+
+
