@@ -1,0 +1,58 @@
+ ////////////////////////index.js///////////////////////////////
+ 
+ import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+//////app.js////////////////////////
+
+import React,{useState} from "react";
+
+
+function App() { 
+ const [item,addItem] = useState([])                             //using the use state hooks to creat a state of array
+ const [curr,updateCurr] = useState("");                         //using the use state hooks to update and save the curre value
+ 
+  function add()
+  {
+   addItem(preValue => {
+    return [...preValue,curr];                                  // using the spread operator in order to add the new value to our array of items
+   })
+  }
+
+  function handleChange(event)
+  {
+    updateCurr(event.target.value);                             //updating the value after each change of the input text 
+   }
+
+  return (
+    <div className="container">
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input
+        onChange={handleChange}                                 ///calling hanfle change function each time the input detects a text change 
+        type="text" />
+        <button
+        onClick={add}                                          //calling hte onclick funciton each time we press the add button 
+        >
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          {item.map((print)=>{ 
+            return <li>{print}</li>;                 //printing through mapping 
+          })}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default App;
