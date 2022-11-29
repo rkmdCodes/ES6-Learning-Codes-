@@ -1,0 +1,156 @@
+/////////////////////////APP.jsx//////////////////////////////////////////////////
+
+import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import Note from "./Note";
+import CreateArea from "./CreateArea.jsx";
+import { useState } from "react";
+
+function App() {
+
+  // state of array of objects to store the values 
+
+  const [items, addItems] = useState([
+    {
+      title: "Note title",
+      content: "Note Content"
+    }
+  ]);
+
+  //function add a new item in our state
+
+  function add(obj) {
+    const heading = obj.title;
+    const cnt = obj.content;
+
+    addItems((preValue) => {
+      return [...preValue, { title: heading, content: cnt }];
+    });
+  }
+
+  //deleting our item from the Keeper after we done ti
+
+  function deleteItems(key) {
+    addItems( preValue=>{
+         return items.filter((value,index)=>{
+           return index !== key;
+         }) 
+
+    })
+  }
+
+  return (
+    <div>
+      <Header />
+      <CreateArea addNew={add} />
+      {items.map((item, index) => {
+        return (
+          <Note
+            key={item.title}
+            ky={index}
+            title={item.title}
+            content={item.content}
+            delete={deleteItems}
+          />
+        );
+      })}
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+//createarea,jsx
+
+
+import React from "react";
+import { useState } from "react";
+
+
+function CreateArea(props) {
+ 
+  //creating a temporary state of objects to store onchange values
+  
+  const [newItem, addNewItem] = useState({
+    title: "",
+    content: ""
+  });
+
+  //handling the on change event from the input area
+
+  function updateNewItem(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    addNewItem( (prevnewItem)=>{
+      return {
+        ...prevnewItem,[name]: value
+      };   
+     }); 
+    
+  }
+
+  //hadling the final add button press event in our app
+
+  function handleClick(event) {
+    props.addNew(newItem);
+    event.preventDefault();
+    addNewItem({
+      title:"",
+      content:""
+    })
+    
+  }
+
+  return (
+    <div>
+      <form>
+        <input
+          name="title"
+          onChange={updateNewItem}
+          placeholder="Title"
+          value={newItem.title}
+        />
+        <textarea
+          name="content"
+          onChange={updateNewItem}
+          placeholder="Take a note..."
+          rows="3"
+          value={newItem.content}
+        />
+        <button onClick={handleClick}>Add</button>
+      </form>
+    </div>
+  );
+}
+
+export default CreateArea;
+
+
+////////////////////////////////note.jsx////////////////
+
+
+import React from "react";
+
+function Note(props) {
+
+  function handleDelete(ky)
+  {
+    props.delete(ky);
+  }
+
+  return (
+    <div className="note">
+      <h1>{props.title}</h1>
+      <p>{props.content}</p>
+      <button onClick={()=>handleDelete(props.ky)}>DELETE</button>
+    </div>
+  );
+}
+
+export default Note;
+
