@@ -1,0 +1,58 @@
+
+//this is rest operator it it used to combine the additional arguments together
+
+//rest operator combine things together
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+                           //for array
+ 
+function sum(a,b,c,...others)
+{
+    //console.log(others);
+    return a+b+c;
+}
+
+const result = sum(2,3,6,8,9,10);
+//console.log(result);
+
+//spread operator-----> this is used to spread the elements of an array or object
+
+
+const students =["rajat","rahul","shivam","shivendrs","siddharth"];
+
+function print(name1,name2,name3,...others)
+{
+  //  console.log(name1,name2,name3);
+  //  console.log(others);
+}
+print(...students);   //passing the elements using the spread opereator 
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+                               //for objects
+
+
+const person = {
+    name:"rajat",
+    branch:"CSE",
+    carrear:"SDE"
+}                               
+
+//now we can see how u use rest with destructring
+
+const {name,...rest} = person;
+
+console.log(name); //name will hold the value of name and rest will combine all other together
+console.log(rest); //u can observe from console rest will combine left values
+
+
+
+//////////////////Spread operator//////////////////////////////////
+
+var newPerson ={
+    ...person,
+    name:"The_bhagwan"  //this is how we update/replace the old values with new one using spread
+}
+
+console.log(newPerson);
