@@ -1,0 +1,93 @@
+//Async , Await , Callback,promise
+
+const datas = [
+{name:"Rajat",designation:"SDE"},
+{name:"Siddharth",designation:"SDE"}
+]
+
+
+function getData()
+{
+    console.log(datas);
+    setTimeout(()=>{
+        let output= "";
+        datas.forEach((element,index)=>{
+             output += '<li>'+element.name+'</li>';
+        
+       })
+       console.log(output);
+       document.getElementById("body").innerHTML=output;
+    },1000);
+   
+}
+
+
+
+///////////////////////////////+    Callback   +/////////////////////////
+
+
+//callback will make sure that it will be called once after the elemnt is added
+//so it will render only when create data will be called and out problem is solved
+
+// createData("World","Chutiya",getData);
+
+
+function createDataCallback(person,profess,callback)
+{
+
+ const newData = {
+  name:person,
+  designation:profess
+}
+
+setTimeout( ()=>{
+
+  datas.push(newData); 
+  callback();
+
+},2000);
+
+}
+
+
+////////////////////////////////+ Promise +//////////////////
+
+// createData("World","Chutiya").then(getData).catch(err=>console.log(err));
+
+
+function createData(person,profess)
+{
+    const newData  = {
+        name:person,
+        designation:profess
+    }
+
+   return new Promise((resolve,reject)=>{ 
+    setTimeout(()=>{
+    
+      datas.push(newData);
+      let error = false;
+      if(!error)
+      {
+        resolve();
+      }
+      else
+      {
+        reject("rejected due to meri marji");
+      }
+     
+    },2000);})
+   
+}
+
+
+
+////////////////////////////////+ Async and Await +//////////////////
+
+async function start()
+{
+  await  createData("World","Chutiya");
+  getData();
+}
+
+start();
