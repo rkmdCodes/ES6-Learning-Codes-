@@ -1,0 +1,39 @@
+//closure and lexical scope in Javascript
+
+var sum = function (a)
+{ 
+    var c = 4;
+    
+    return function(b)
+    {
+        return a+b+c;
+    }
+
+}
+
+var func = sum(2);          
+var final = func(3);         // value of  2 will be store after the call that is called closure
+                             // and a and c will be available for returning function is called
+                             //lexical scope. 
+
+
+
+/////////////example 2 /////////////////////////////
+
+var sum2 = function (a ,b, c)
+{
+   return { 
+    getSumTwo:function(){
+        return a+b;
+    }
+    ,
+    getSumThree()
+    {
+        return a+b+c;
+    }
+}
+}
+
+var store = sum2(2,3,4);
+
+console.log(store.getSumThree());
