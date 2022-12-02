@@ -1,0 +1,41 @@
+//call apply bind in  ES6
+
+const userDetails = {
+    name:"Rajat Dwivedi",
+    Profession:"Software Engineer",
+    age:"20",
+    
+}
+
+const  printDetails = function(state,country,...other)
+{
+    
+    console.log(this.name ,state ,country);
+}
+
+
+
+printDetails.call(userDetails ,"Patna" , "Bihar");
+
+//call function -> function borrowing in normal words
+
+const userDetails2 = {
+    name:"Siddharth Tiwari",
+    Profession:"Software Engineer",
+    age:"20"
+}
+
+printDetails.call(userDetails2,"Delhi","India"); 
+
+// with the help of call this pointer of userdetails is pointing
+//the values in userDetails2 this is magic of call ;)
+
+//apply -> we pass other arguments as a array
+
+printDetails.apply(userDetails2,["delhi","mumbai","Pathna","Punjbab"])
+
+//bind->funciton is called once then lator we invoke it
+//when needed
+
+var newFun = printDetails.bind(userDetails,"delhi","mumbai");
+console.log(newFun())
