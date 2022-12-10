@@ -1,0 +1,56 @@
+.........................installation........................
+
+npm i react-router-dom;
+
+import react from "react";
+import {Routes , Route} from "react-router-dom";
+import Book from "Book.jsx";
+
+syntax-->
+
+<BrowserRouter>
+      <Routes>
+          <Route path="/" element={<Book/>} />
+          <Route path="/Book" element={<Book/>} />
+          <Route path="/Topic" >                                                       *****   nesting of routes   **********
+             <Route index element={<TopicList />} />
+             <Route path="/:history" element={<HistoryBook />} />
+             <Route path="/:hindi" element={<HindiBook />} />
+          </Route>
+         <Route path = "*" element = {<NotFound/>} />                                  ******  " * "  matches anything so we use it to render 404 if no route exist ***
+      </Routes> 
+<BrowserRouter>
+
+
+
+*  useParams() -> it have all custom parameters that we pass with our router
+*  <Outlet />  -> it renders the current route
+*  BrowserRoute , HashRoute , History Router , Memory Router , Static Router  and Native Router are the types of router 
+
+*************           WE CAN ALSO USE useRoutes HOOK TO STORE ROUTES IN ARRAY OF OBJECTS           ******************
+
+function App()
+{
+    let elementt = useRoutes([
+        {
+            path:"/",
+            element:<Home/>
+        },
+        {
+            path:"/compose",
+            element:<Compose/>
+        },
+        {
+            path:"/contact",
+            element:<Contact/>
+        },
+        {
+            path:"/About",
+            element:<About/>
+        }
+    ])
+
+    return <div>  
+    {elementt}                          {/* we are using useRoutes hook to store routes in array of object */}
+    </div>
+}
