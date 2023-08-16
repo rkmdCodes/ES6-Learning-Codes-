@@ -1,0 +1,74 @@
+
+ //iterator 
+ 
+const range = {
+    start:0,
+    end:10,
+    [Symbol.iterator](){
+        let that = this;
+        let i = this.start;
+        return {
+            next:function()
+             {return {value:i , done:i++>that.end}}
+        }
+    }
+}
+
+//generator
+
+const starRange = {
+    start:0,
+    end:15,
+    *[Symbol.iterator](){
+        for(let i = this.start; i <= this.end ;i++)
+         yield i;
+    }
+}
+
+//better generetor
+
+function *rangeGenerator(start , end)
+{
+    for(let i = start;i<=end;i++)
+     yield i ;
+    
+}
+
+// for(let r of rangeGenerator(0,50))
+//   console.log(r); 
+//  or
+// console.log([...rangeGenerator(0,10)])
+
+
+   "Lets see composition of generators "
+
+function* multiRangeGenerator()
+{
+    yield* rangeGenerator(0,10);
+    yield* rangeGenerator(20,50);
+    yield* rangeGenerator(60,100);
+}
+
+// const generator = multiRangeGenerator();
+// console.log([...generator]); // created various generators by composition
+
+
+
+            "Generators can also take input from their next function"
+            
+function *gen()
+{
+    let result = yield 1;
+    console.log(result);
+    
+    let result2 = yield 2;
+    console.log(result2);
+    
+    yield 3;
+    let result3 = console.log(result)
+}
+
+const generator = gen()
+console.log(generator.next(13));    //first next result can't be seen  
+console.log(generator.next(12));
+console.log(generator.next(15));
